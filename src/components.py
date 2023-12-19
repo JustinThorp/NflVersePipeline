@@ -35,7 +35,7 @@ class BasePipeline(ABC):
         pass
 
     def load(self):
-        fs = gcsfs.GCSFileSystem(project='handy-reference-305822')
+        fs = gcsfs.GCSFileSystem(project='handy-reference-305822',token='creds.json')
         with fs.open(f'rawnfldata/nflverse/{self.table}_{self.season}.parquet','wb') as f:
             self.data.write_parquet(f)
 
@@ -203,7 +203,7 @@ class Players(BasePipeline):
         return self
 
     def load(self):
-        fs = gcsfs.GCSFileSystem(project='handy-reference-305822')
+        fs = gcsfs.GCSFileSystem(project='handy-reference-305822',token='creds.json')
         with fs.open(f'rawnfldata/nflverse/{self.table}.parquet','wb') as f:
             self.data.write_parquet(f)
 
